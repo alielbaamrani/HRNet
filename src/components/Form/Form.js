@@ -1,20 +1,30 @@
 import React from 'react'
 import './form.scss'
 import { setValue } from '../../actions'
-import { states } from './countryList'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import SelectState from '../SelectState/SelectState'
+import { DatePicker } from 'antd'
 
 function Form() {
   const newEmployee = useSelector((state) => state.newEmployee)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const dateFormatList = ['DD/MM/YYYY']
+
+  const onChange = function (date, dateString) {
+    dispatch(setValue('dateOfBirth', dateString))
+    console.log(dateString)
+  }
+  const onChangeStart = function (date, dateString) {
+    dispatch(setValue('startDate', dateString))
+    console.log(dateString)
+  }
 
   const handleChange = (event, inputName) => {
     const inputValue = event.target.value
     dispatch(setValue(inputName, inputValue))
   }
-
 
   const handleSubmit = () => {
     navigate('/employee-list')
@@ -42,7 +52,7 @@ function Form() {
             className="lastName"
           />
         </label>
-        <label>
+        {/* <label>
           Date of Birth
           <input
             type="date"
@@ -50,15 +60,14 @@ function Form() {
             onChange={(event) => handleChange(event, 'dateOfBirth')}
             className="birth"
           />
+        </label> */}
+        <label>
+          Date
+          <DatePicker format={dateFormatList} onChange={onChange} />
         </label>
         <label>
           Start Date
-          <input
-            type="date"
-            value={newEmployee.startDate}
-            onChange={(event) => handleChange(event, 'startDate')}
-            className="date"
-          />
+          <DatePicker format={dateFormatList} onChange={onChangeStart} />
         </label>
 
         <div className="address">
@@ -82,17 +91,7 @@ function Form() {
           </label>
           <label>
             State
-            <select
-              id="select"
-              value={newEmployee.state}
-              onChange={(event) => handleChange(event, 'state')}
-            >
-              {states.map((item) => (
-                <option key={item.name} value={item.name}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
+            <SelectState />
           </label>
           <label>
             Zip Code
@@ -119,7 +118,7 @@ function Form() {
           <option>Legal</option>
         </select>
 
-        <input onClick={handleSubmit} className="submit" type="submit" value="Save"/>
+        <input onClick={handleSubmit} className="submit" type="submit" value="Save" />
       </form>
     </div>
   )
