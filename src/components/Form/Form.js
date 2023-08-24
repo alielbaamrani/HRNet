@@ -1,15 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './form.scss'
 import { setValue } from '../../actions'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 import SelectState from '../SelectState/SelectState'
 import { DatePicker } from 'antd'
+import { add } from '../../reducers/employeeSlice'
+import { Modal } from 'ael-modal'
 
 function Form() {
+  // MODAL
+  const [modalContent, setModalContent] = useState('')
+
+  const openModal = () => {
+    const content = '<p>This is the modal content.</p>'
+    setModalContent(content)
+    modal.open({ content })
+  }
+
+  const closeModal = () => {
+    setModalContent('')
+    modal.close()
+  }
+
+  const modal = new Modal()
+
+  //
   const newEmployee = useSelector((state) => state.newEmployee)
   const dispatch = useDispatch()
-  const navigate = useNavigate()
   const dateFormatList = ['DD/MM/YYYY']
 
   const onChange = function (date, dateString) {
@@ -26,14 +43,31 @@ function Form() {
     dispatch(setValue(inputName, inputValue))
   }
 
-  const handleSubmit = () => {
-    navigate('/employee-list')
+  const handleSubmit = (e) => {
+    openModal()
+    e.preventDefault()
+    console.log(newEmployee)
+
+    dispatch(add(newEmployee.CreateEmployee))
     console.log('handleSubmit')
   }
 
   return (
     <div className="container">
-      <form>
+      <div>
+        <button onClick={openModal}>Open Modal</button>
+
+        {modalContent && (
+          <div className="modal">
+            <div
+              className="modal-content"
+              dangerouslySetInnerHTML={{ __html: modalContent }}
+            />
+            <button onClick={closeModal}>Close</button>
+          </div>
+        )}
+      </div>
+      <form onSubmit={handleSubmit}>
         <label>
           First Name
           <input
@@ -52,15 +86,6 @@ function Form() {
             className="lastName"
           />
         </label>
-        {/* <label>
-          Date of Birth
-          <input
-            type="date"
-            value={newEmployee.dateOfBirth}
-            onChange={(event) => handleChange(event, 'dateOfBirth')}
-            className="birth"
-          />
-        </label> */}
         <label>
           Date
           <DatePicker format={dateFormatList} onChange={onChange} />
@@ -117,8 +142,7 @@ function Form() {
           <option>Human Resources</option>
           <option>Legal</option>
         </select>
-
-        <input onClick={handleSubmit} className="submit" type="submit" value="Save" />
+        <input className="submit" type="submit" value="Save" />
       </form>
     </div>
   )

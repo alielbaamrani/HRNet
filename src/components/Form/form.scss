@@ -59,3 +59,12 @@ form {
     transform: scale(0.99);
   }
 }
+
+.modal {
+  position: absolute;
+  display: flex;
+  background-color: rgb(117 190 218 / 0.5); /* 50% transparent */
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}

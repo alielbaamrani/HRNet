@@ -2,13 +2,14 @@ import React, { useRef, useState } from 'react'
 import { SearchOutlined } from '@ant-design/icons'
 import Highlighter from 'react-highlight-words'
 import { Button, Input, Space, Table } from 'antd'
-import {  useSelector } from 'react-redux'
-
+import { useSelector } from 'react-redux'
+// import { selectEmployees } from '../../reducers/employeeSlice'
 
 
 const TableList = () => {
 
-  const dataList = useSelector((state) => state.newEmployee.EmployeeList)
+  const dataList = useSelector((state) => state.employee.employees)
+  // const dataList = useSelector(selectEmployees)
 
   const [searchText, setSearchText] = useState('')
   const [searchedColumn, setSearchedColumn] = useState('')

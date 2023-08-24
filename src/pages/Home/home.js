@@ -4,6 +4,7 @@ import './home.scss'
 import Navbar from '../../components/Navbar/Navbar'
 import Form from '../../components/Form/Form'
 function home() {
+  
   return (
     <div>
       <Navbar title="HRnet" />
