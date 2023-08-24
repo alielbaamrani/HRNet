@@ -55,7 +55,6 @@ function Form() {
   return (
     <div className="container">
       <div>
-        <button onClick={openModal}>Open Modal</button>
 
         {modalContent && (
           <div className="modal">
