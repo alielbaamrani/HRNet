@@ -5,26 +5,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import SelectState from '../SelectState/SelectState'
 import { DatePicker } from 'antd'
 import { add } from '../../reducers/employeeSlice'
-import { Modal } from 'ael-modal'
+import Modal from 'ael-modal'
+const Form = () => {
+  const [modalIsDisplayed, setModalIsDisplayed] = useState(false)
 
-function Form() {
-  // MODAL
-  const [modalContent, setModalContent] = useState('')
-
-  const openModal = () => {
-    const content = '<p>This is the modal content.</p>'
-    setModalContent(content)
-    modal.open({ content })
-  }
-
-  const closeModal = () => {
-    setModalContent('')
-    modal.close()
-  }
-
-  const modal = new Modal()
-
-  //
   const newEmployee = useSelector((state) => state.newEmployee)
   const dispatch = useDispatch()
   const dateFormatList = ['DD/MM/YYYY']
@@ -44,7 +28,8 @@ function Form() {
   }
 
   const handleSubmit = (e) => {
-    openModal()
+    setModalIsDisplayed(true)
+
     e.preventDefault()
     console.log(newEmployee)
 
@@ -54,18 +39,16 @@ function Form() {
 
   return (
     <div className="container">
-      <div>
-
-        {modalContent && (
+      <Modal
+        isDisplayed={modalIsDisplayed}
+        onCloseModal={() => setModalIsDisplayed(false)}
+        content={
           <div className="modal">
-            <div
-              className="modal-content"
-              dangerouslySetInnerHTML={{ __html: modalContent }}
-            />
-            <button onClick={closeModal}>Close</button>
+            <p>l'employée a bien été ajoutée a la liste !</p>
           </div>
-        )}
-      </div>
+        }
+      />
+
       <form onSubmit={handleSubmit}>
         <label>
           First Name
