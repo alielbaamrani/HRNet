@@ -3,18 +3,13 @@ import { SearchOutlined } from '@ant-design/icons'
 import Highlighter from 'react-highlight-words'
 import { Button, Input, Space, Table } from 'antd'
 import { useSelector } from 'react-redux'
-// import { selectEmployees } from '../../reducers/employeeSlice'
-
 
 const TableList = () => {
-
   const dataList = useSelector((state) => state.employee.employees)
-  // const dataList = useSelector(selectEmployees)
 
   const [searchText, setSearchText] = useState('')
   const [searchedColumn, setSearchedColumn] = useState('')
   const searchInput = useRef(null)
-
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm()
     setSearchText(selectedKeys[0])
@@ -117,7 +112,6 @@ const TableList = () => {
       title: 'StartDate',
       dataIndex: 'startDate',
       key: 'startDate',
-      ...getColumnSearchProps('startDate'),
       sorter: (a, b) => a.startDate.length - b.startDate.length,
       sortDirections: ['descend', 'ascend'],
     },
@@ -133,7 +127,6 @@ const TableList = () => {
       title: 'Date Of Birth',
       dataIndex: 'dateOfBirth',
       key: 'dateOfBirth',
-      ...getColumnSearchProps('dateOfBirth'),
       sorter: (a, b) => a.dateOfBirth.length - b.dateOfBirth.length,
       sortDirections: ['descend', 'ascend'],
     },
@@ -141,7 +134,6 @@ const TableList = () => {
       title: 'Street',
       dataIndex: 'street',
       key: 'street',
-      ...getColumnSearchProps('street'),
       sorter: (a, b) => a.street.length - b.street.length,
       sortDirections: ['descend', 'ascend'],
     },
@@ -149,7 +141,6 @@ const TableList = () => {
       title: 'City',
       dataIndex: 'city',
       key: 'city',
-      ...getColumnSearchProps('city'),
       sorter: (a, b) => a.city.length - b.city.length,
       sortDirections: ['descend', 'ascend'],
     },
@@ -157,7 +148,6 @@ const TableList = () => {
       title: 'State',
       dataIndex: 'state',
       key: 'state',
-      ...getColumnSearchProps('state'),
       sorter: (a, b) => a.state.length - b.state.length,
       sortDirections: ['descend', 'ascend'],
     },
@@ -165,13 +155,23 @@ const TableList = () => {
       title: 'Zip Code',
       dataIndex: 'zipCode',
       key: 'zipCode',
-      ...getColumnSearchProps('zipCode'),
       sorter: (a, b) => a.zipCode.length - b.zipCode.length,
       sortDirections: ['descend', 'ascend'],
     },
   ]
 
-  return <Table columns={columns} dataSource={dataList} />
+  return (
+    <Table
+      columns={columns}
+      dataSource={dataList}
+      pagination={{
+        position: ['topLeft'],
+        showSizeChanger: true, // Activez la fonctionnalité de changement de taille
+        pageSizeOptions: ['10', '20', '50'], // Options de taille de page
+        defaultPageSize: 10, // Taille de page par défaut
+      }}
+    />
+  )
 }
 
 export default TableList

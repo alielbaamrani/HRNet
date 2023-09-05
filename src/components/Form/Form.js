@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './form.scss'
 import { setValue } from '../../actions'
 import { useDispatch, useSelector } from 'react-redux'
@@ -6,50 +6,77 @@ import SelectState from '../SelectState/SelectState'
 import { DatePicker } from 'antd'
 import { add } from '../../reducers/employeeSlice'
 import Modal from 'ael-modal'
+/**
+ * Composant Form pour la saisie des données d'un nouvel employé.
+ */
 const Form = () => {
-  const [modalIsDisplayed, setModalIsDisplayed] = useState(false)
+  // Utilisation de useEffect pour ajouter un gestionnaire d'événements lors du rendu initial.
+  useEffect(() => {
+    // Gestionnaire d'événement pour fermer le modal lorsque l'utilisateur clique en dehors de celui-ci.
+    let handler = (e) => {
+      if (e.target.classList.contains("custom-modal")) {
+        setModalIsDisplayed(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+  });
 
-  const newEmployee = useSelector((state) => state.newEmployee)
-  const dispatch = useDispatch()
-  const dateFormatList = ['DD/MM/YYYY']
+  // Déclaration d'un état pour le modal
+  const [modalIsDisplayed, setModalIsDisplayed] = useState(false);
 
+  // Sélection des données du nouvel employé depuis le state global
+  const newEmployee = useSelector((state) => state.newEmployee);
+  const dispatch = useDispatch();
+
+  // Format de date pour le DatePicker
+  const dateFormatList = ['DD/MM/YYYY'];
+
+  // Fonction de gestionnaire de changement de date de naissance
   const onChange = function (date, dateString) {
-    dispatch(setValue('dateOfBirth', dateString))
-    console.log(dateString)
-  }
+    dispatch(setValue('dateOfBirth', dateString));
+    console.log(dateString);
+  };
+
+  // Fonction de gestionnaire de changement de date de début
   const onChangeStart = function (date, dateString) {
-    dispatch(setValue('startDate', dateString))
-    console.log(dateString)
-  }
+    dispatch(setValue('startDate', dateString));
+    console.log(dateString);
+  };
 
+  // Fonction de gestionnaire de changement d'entrée de texte
   const handleChange = (event, inputName) => {
-    const inputValue = event.target.value
-    dispatch(setValue(inputName, inputValue))
-  }
+    const inputValue = event.target.value;
+    dispatch(setValue(inputName, inputValue));
+  };
 
+  // Fonction de gestionnaire de soumission du formulaire
   const handleSubmit = (e) => {
-    setModalIsDisplayed(true)
+    // Afficher le modal lors de la soumission du formulaire
+    setModalIsDisplayed(true);
 
-    e.preventDefault()
-    console.log(newEmployee)
+    e.preventDefault();
+    console.log(newEmployee);
 
-    dispatch(add(newEmployee.CreateEmployee))
-    console.log('handleSubmit')
-  }
+    // Dispatch de l'action pour ajouter le nouvel employé
+    dispatch(add(newEmployee.CreateEmployee));
+    console.log('handleSubmit');
+  };
 
   return (
     <div className="container">
+      {/* Modal pour afficher un message de succès */}
       <Modal
         isDisplayed={modalIsDisplayed}
         onCloseModal={() => setModalIsDisplayed(false)}
         content={
           <div className="modal">
-            <p>l'employée a bien été ajoutée a la liste !</p>
+            <p>L'employé a bien été ajouté à la liste !</p>
           </div>
         }
       />
 
       <form onSubmit={handleSubmit}>
+        {/* Champs de saisie des informations de l'employé */}
         <label>
           First Name
           <input
@@ -77,6 +104,7 @@ const Form = () => {
           <DatePicker format={dateFormatList} onChange={onChangeStart} />
         </label>
 
+        {/* Champs d'adresse */}
         <div className="address">
           <label>
             Street
@@ -111,6 +139,7 @@ const Form = () => {
           </label>
         </div>
 
+        {/* Sélection du département */}
         <label>Department</label>
         <select
           className="department"
@@ -124,10 +153,11 @@ const Form = () => {
           <option>Human Resources</option>
           <option>Legal</option>
         </select>
+        {/* Bouton de soumission du formulaire */}
         <input className="submit" type="submit" value="Save" />
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Form
+export default Form;
