@@ -4,8 +4,6 @@ A simple and basic reusable modal component using react
 
 <a href="https://www.npmjs.com/package/ael-modal"><img alt="npm" src="https://img.shields.io/npm/dw/ael-modal"></a>
 
-<a href="https://www.npmjs.com/package/ael-modal"><img alt="npm" src="https://img.shields.io/npm/v/ael-modal"></a>
-
 <a href="https://www.npmjs.com/package/ael-modal"><img alt="npm bundle size" src="https://img.shields.io/bundlephobia/minzip/ael-modal"></a>
 
 <a href="https://www.npmjs.com/package/ael-modal">
