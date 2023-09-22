@@ -81,6 +81,7 @@ const Form = () => {
           First Name
           <input
             type="text"
+            required="required"
             value={newEmployee.firstName}
             onChange={(event) => handleChange(event, 'firstName')}
             className="firstName"
@@ -90,6 +91,7 @@ const Form = () => {
           Last Name
           <input
             type="text"
+            required="required"
             value={newEmployee.lastName}
             onChange={(event) => handleChange(event, 'lastName')}
             className="lastName"
@@ -110,6 +112,7 @@ const Form = () => {
             Street
             <input
               type="text"
+              required="required"
               value={newEmployee.street}
               onChange={(event) => handleChange(event, 'street')}
               className="Street"
@@ -119,6 +122,7 @@ const Form = () => {
             City
             <input
               type="text"
+              required="required"
               value={newEmployee.city}
               onChange={(event) => handleChange(event, 'city')}
               className="City"
@@ -132,6 +136,7 @@ const Form = () => {
             Zip Code
             <input
               type="number"
+              required="required"
               value={newEmployee.zipCode}
               onChange={(event) => handleChange(event, 'zipCode')}
               className="Zip Code"
@@ -143,6 +148,7 @@ const Form = () => {
         <label>Department</label>
         <select
           className="department"
+          required="required"
           value={newEmployee.departement}
           onChange={(event) => handleChange(event, 'departement')}
           id="department"
