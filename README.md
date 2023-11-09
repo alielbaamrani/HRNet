@@ -1,6 +1,5 @@
 <a name="readme-top"></a>
 
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -16,28 +15,24 @@ project 14 for OpenClassroom
     <br />
 </div>
 
-
-
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
 
 HRNet project which aims to be able to add new employees to a sortable table.
 
-
 ### Built With
 
-* react
-* sass
-* redux
-* ael-modal
-* antd
-
+- react
+- sass
+- redux
+- ael-modal
+- antd
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- GETTING STARTED -->
+
 ## Getting Started
 
 This is an example of how you may give instructions on setting up your project locally.
@@ -46,7 +41,8 @@ To get a local copy up and running follow these simple example steps.
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
-* npm
+
+- npm
   ```sh
   npm install npm@latest -g
   ```
@@ -61,42 +57,9 @@ _Below is an example of how you can instruct your audience on installing and set
    ```
 2. Install NPM packages
    ```sh
-   npm install 
+   npm install
    ```
-
-
-### how to run 
-
-1. Clone the repo
+   3. run project
    ```sh
-Npm run start 
+   npm run start
    ```
-
-
-
-
-
-
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-
-
-
-<!-- CONTACT -->
-## LINK
-
-
-Project Link: [https://github.com/alielbaamrani/HRNet/tree/main)
-
-
-
-
-
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[React-url]: https://reactjs.org/
